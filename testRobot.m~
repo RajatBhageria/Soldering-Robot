@@ -1,0 +1,31 @@
+function [] = testRobot(pinLetter, pinNumber)
+%Note that the pinLetter has to be a capital letter between 'A' and 'Q'
+
+%xyz distance fo the corner of the perfboard closest to the robot from the
+%base of the robot
+xPerfToBase = 10;%mm
+yPerfToBase = 20;%mm
+zPerfToBase = 20;%mm
+
+%distance from the left corner to the closest pin
+xCornerToPin = 2;%mm
+yCornerToPin = 2;%mm
+
+%distance between the centers of respective pins 
+distBtwPins = 5; 
+
+%convert the pinLetter to a number 
+alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+alphaNumber = strfind(alphabet,pinLetter); 
+
+%get the goal xyz position to actuate the tip of the robot to
+xGoal = alphaNumber * distBtwPins + xCornerToPin + xPerfToBase; 
+yGoal = alphaNumber * distBtwPins + yCornerToPin + yPerfToBase;
+zGoal = zPerfToBase;
+
+%run the robot 
+p
+potentialFieldPlanner(posOfObstacles,ri,qStart,qEnd)
+
+end
+

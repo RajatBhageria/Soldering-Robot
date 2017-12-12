@@ -46,11 +46,15 @@ scatter3(xGoal,yGoal,zGoal,100,'r','filled');
 %starting position is initial q=zero vector
 qStart = [0,0,0,0,0,0];
 %find the goal orientation of the end effector 
-goalOrientation = [0,1,0; 1,0,0; 0,0,-1];
+goalOrientation = [1,0,0; 0,1,0; 0,0,-1];
+goalOrientation = [];
+%goalOrientation =  [-0.0337   -0.1247    0.9916; -0.0042    0.9922    0.1246; -0.9994    0.0000   -0.0340];
 %find qEnd using IK using the goal EE position and also the goal
 %orientation 
 T = [[goalOrientation;[0,0,0]],[xGoal;yGoal;zGoal;1]];
 [qEnd,isPossible] = IK_lynx_sol(T); 
+%qEnd=[0.1250    .78   -0.4469   -0.5850    3.1416         0];
+%qEnd=[0.1250    1.0659   -0.4469   -0.5850    3.1416         0];
 
 %testing
 [x,~] = updateQ(qEnd); 

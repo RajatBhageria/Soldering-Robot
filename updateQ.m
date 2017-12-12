@@ -21,9 +21,10 @@ L1 = 3*25.4;          %base height (in mm)
 L2 = 5.75*25.4;       %shoulder to elbow length (in mm)
 L3 = 7.375*25.4;      %elbow to wrist length (in mm)
 L4 = 1.75*25.4;       %Wrist1 to Wrist2 (in mm)
-%L5 = 1.25*25.4;       %wrist2 to base of gripper (in mm)
-L5 = 100;
-L6 = 1.125*25.4;      %gripper length (in mm)
+L5 = 1.25*25.4;       %wrist2 to base of gripper (in mm)
+%L5 = 100;
+%L6 = 1.125*25.4;      %gripper length (in mm)
+L6 = 100; 
 PI = pi();            %PI constant
 
 
@@ -57,16 +58,22 @@ A4 = [cos(q(4)-(PI/2)) -sin(q(4)-(PI/2))*cos(-PI/2)   sin(q(4)-(PI/2))*sin(-PI/2
 %               0          0  1  L4 + L5;
 %               0          0  0        1];
 
-A5 = [cos(q(5)) -sin(q(5))   0   (L5)*cos(q(5));
-      sin(q(5))  cos(q(5))   0   (L5)*sin(q(5));
-              0       0      1         0;
-              0       0      0         1];
+% A5 = [cos(q(5)) -sin(q(5))   0   (L5)*cos(q(5));
+%       sin(q(5))  cos(q(5))   0   (L5)*sin(q(5));
+%               0       0      1         0;
+%               0       0      0         1];
+
+A5 = [1 0 0  0;
+      0 1 0  0;
+      0 0 1  L5;
+      0 0 0  1];
      
 %Gripper Frame w.r.t. Frame 5
-A6 = [1 0 0  0;
-      0 1 0  0;
-      0 0 1  L6;
-      0 0 0  1];
+angle = pi; 
+A6 = [cos(angle) -sin(angle) 0  L6*cos(angle);
+      sin(angle) cos(angle)  0  L6*sin(angle);
+      0             0        1  0;
+      0             0        0  1];
 
 %Puts the Homogeneous Tranformations in T Matrix
 T(:,:,1) = A1;
@@ -88,7 +95,7 @@ X(4,:) = ((A1*A2*A3)*[0;0;0;1])';
 %Position of Fifth Joint (2nd Wrist)
 X(5,:) = ((A1*A2*A3*A4)*[0;0;0;1])';
 %Position of Gripper (Middle of the Gripper)
-X(6,:) = ((A1*A2*A3*A4*A5)*[0;0;0;1])';
+X(6,:) = ((A1*A2*A3*A4*A5*A6)*[0;0;0;1])';
 
 %Outputs the 6x3 of the locations of each joint in the Base Frame
 X = X(:,1:3);

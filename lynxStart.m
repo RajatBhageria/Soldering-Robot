@@ -70,7 +70,7 @@ frameSkip = 1;
 frameCounter = 0;
 
 % zero angles, L shaped pose
-qs = [0,0,0,0,pi,0];
+qs = [0,0,0,0,0,0];
 
 % Check property inputs
 if mod(size(varargin,2), 2) == 1
@@ -157,4 +157,4 @@ end
 evalin('base', 'global lynx delay_ms qs')
 
 %Send the robot to a home configuration
-lynxServo(0,0,0,0,pi,0);
+lynxServo(0,0,0,0,0,0);

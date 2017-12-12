@@ -24,13 +24,12 @@ while any((qEnd(1,1:5) - qCurr(1,1:5)) > epsilon)
 
     %initialize taua
     tauaTotal = zeros(6,1); 
-    taurTotal = zeros(6,1); 
     
     %Find all the J matrices using qCurr 
     JAll = [];
     
     syms q1 q2 q3 q4 q5 q6
-    for joint = 1:6
+    for joint = 1:5
         %% Calculate the attractive joint effort for joint i 
         %Find the positions of the current position and the end goal of the
         % joint i. 
@@ -83,7 +82,7 @@ while any((qEnd(1,1:5) - qCurr(1,1:5)) > epsilon)
     tau = tauaTotal;
     
     %set the step rate
-    alpha = 0.02;
+    alpha = 0.05;
     
     %ensure there is not
     if (norm(tau)~=0)

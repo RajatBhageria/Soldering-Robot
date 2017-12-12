@@ -94,6 +94,7 @@ function [] = lynxServo(th1, th2, th3, th4, th5, th6)
     end
     
     qs = q;
+    q(5) = pi; 
 
     % Send the angles to the Lynx
     if lynx.hardware

@@ -49,7 +49,7 @@ f = 1.125*25.4; % gripper length
 
 off = [ 0 b c 0 0 0]; % link length
 D = [ a 0 0 0 d+e 0]; % link offset
-alph = [ -pi/2 0 0 -pi/2 0 0] ; % link twist 
+alph = [ -pi/2 0 0 -pi/2 0 0] ; % link twist
 th = [ 0 -pi/2 +pi/2 -pi/2 0 0]; % joint angle
 
 % Initialize the robot links
@@ -70,7 +70,7 @@ frameSkip = 1;
 frameCounter = 0;
 
 % zero angles, L shaped pose
-qs = [0,0,0,0,0,0];
+qs = [0,0,0,0,pi,0];
 
 % Check property inputs
 if mod(size(varargin,2), 2) == 1
@@ -157,4 +157,4 @@ end
 evalin('base', 'global lynx delay_ms qs')
 
 %Send the robot to a home configuration
-lynxServo(0,0,0,0,0,0);
+lynxServo(0,0,0,0,pi,0);

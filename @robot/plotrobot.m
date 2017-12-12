@@ -343,6 +343,9 @@ for i=(1:robot.n-1),
             'linestyle', '--', ...
             'erasemode', 'xor');
     end
+    
+   %draw the perfboard 
+   
 end
 
 %ANIMATE   move an existing graphical robot

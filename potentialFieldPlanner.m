@@ -5,7 +5,7 @@ function [] = potentialFieldPlanner(qStart,qEnd)
 % @param: qEnd: a 6x1 matrix of the joint configurations of ending pos
 
 %start the lynx
-%lynxStart();        
+lynxStart();        
 
 % set the epsilon for what a reasonable distance to stop is 
 epsilon = .5; 

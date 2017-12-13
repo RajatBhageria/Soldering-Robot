@@ -46,14 +46,15 @@ scatter3(xGoal,yGoal,zGoal,100,'r','filled');
 %starting position is initial q=zero vector
 qStart = [0,0,0,0,0,0];
 %find the goal orientation of the end effector 
-goalOrientation = [0,1,0; 1,0,0; 0,0,1];
+goalOrientation = [1,0,0; 0,1,0; 0,0,-1];
 %find qEnd using IK using the goal EE position and also the goal
 %orientation 
-%T = [[goalOrientation;[0,0,0]],[xGoal;yGoal;zGoal;1]];
-%[qEnd,isPossible] = IK_lynx_sol(T); 
+zGoal = zGoal + 100;
+T = [[goalOrientation;[0,0,0]],[xGoal;yGoal;zGoal;1]];
+[qEnd,isPossible] = IK_lynx_sol(T); 
 
-zGoal = zGoal - 92.4;
-qEnd = getQ(xGoal, yGoal, zGoal); 
+%zGoal = zGoal - 92.4;
+%qEnd = getQ(xGoal, yGoal, zGoal); 
 
 %testing
 [x,~] = updateQ(qEnd); 
@@ -67,7 +68,7 @@ disp ([xGoal yGoal zGoal]);
 %end 
 
 %wait a little to solder 
-delay(50); 
+%delay(50); 
 
 %return to the initial position 
 lynxServo(qStart); 

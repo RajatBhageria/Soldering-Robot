@@ -5,22 +5,36 @@ L2 = 5.75*25.4;       %shoulder to elbow length (in mm)
 L3 = 7.375*25.4;      %elbow to wrist length (in mm)
 L4 = 1.75*25.4;       %Wrist1 to Wrist2 (in mm)
 L5 = 1.25*25.4;       %wrist2 to base of gripper (in mm)
-L6 = 100; 
-zdist = L6;    %Distance from Wrist Center to Gripper Center
-PI = pi();            %Create PI constant
+L6 = 0;             %Distance from Wrist Center to Gripper Center
+
+zdist = L6;        
 xyDist = L4+L5; 
 
 %angle away the center
-th1 = 
+th1 = atan2(y,x); 
 
 %Calculates the wrist center location
-xw = x - zdist - xyDist * cos();
-yw = y - zdist - xyDist * sin();
-zw = y - zdist; 
-%disp ([xw yw, zw]);
+xw = x - xyDist * cos(th1);
+yw = y - xyDist * sin(th1);
+zw = z + zdist; 
 
-%Calculates the theta 1 needed
-th1 = atan2(yw,xw);
+%Parameters needed for calculating theta 2 and theta 3
+r = sqrt(xw^2 + yw^2);
+s = abs(zw - L1);
+D = (r^2 + s^2 - L2^2 - L3^2)/(-2*L2*L3);
+
+%Calculates theta 3
+th3 = atan2(D,sqrt(1-D^2));
+
+%Uses theta 3 to calculate theta 2
+th2 = atan2(r,s) - atan2(L3*cos(th3),L2-L3*sin(th3));
+
+%Calculates theta 4
+zdist = z - zw;
+xydist = sqrt((x - xw)^2 + (y - yw)^2);
+th4 = -atan2(zdist, xydist) - th2 - th3;
+
+q = [th1, th2, th3, th4, 0, 0];
 
 end
 

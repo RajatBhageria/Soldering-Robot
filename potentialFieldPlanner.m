@@ -8,7 +8,7 @@ function [] = potentialFieldPlanner(qStart,qEnd)
 lynxStart();        
 
 % set the epsilon for what a reasonable distance to stop is 
-epsilon = .35; 
+epsilon = .5; 
 
 %assign qCurr to be qStart. qCurr will be updated throughout the while loop
 qCurr = qStart; 
@@ -82,7 +82,7 @@ while any((qEnd(1,1:5) - qCurr(1,1:5)) > epsilon)
     tau = tauaTotal;
     
     %set the step rate
-    alpha = 0.02;
+    alpha = 0.015;
     
     %ensure there is not
     if (norm(tau)~=0)

@@ -12,23 +12,23 @@
 
 function [q, is_possible] = IK_lynx(T)
 
-%global L5; 
-
 L1 = 3*25.4;          %base height (in mm)
 L2 = 5.75*25.4;       %shoulder to elbow length (in mm)
 L3 = 7.375*25.4;      %elbow to wrist length (in mm)
 L4 = 1.75*25.4;       %Wrist1 to Wrist2 (in mm)
 L5 = 1.25*25.4;       %wrist2 to base of gripper (in mm)
-%L5 = 100; 
 %L6 = 1.125*25.4;      %gripper length (in mm)
 L6 = 100; 
 D6 = L4 + L5 + L6;    %Distance from Wrist Center to Gripper Center
 PI = pi();            %Create PI constant
 
+D7 = L4 + L5; 
+
 %Calculates the wrist center location
-xw = T(1,4) - D6*T(1,3);
-yw = T(2,4) - D6*T(2,3);
-zw = T(3,4) - D6*T(3,3);
+xw = T(1,4) - D6*T(1,3); %- D7*T(1,2);
+yw = T(2,4) - D6*T(2,3); %- D7*T(2,2);
+zw = T(3,4) - D6*T(3,3); % - D7*T(3,2);
+%disp ([xw yw, zw]);
 
 %Calculates the theta 1 needed
 th1 = atan2(yw,xw);

@@ -27,7 +27,6 @@ L5 = 1.25*25.4;       %wrist2 to base of gripper (in mm)
 L6 = 100; 
 PI = pi();            %PI constant
 
-
 %Frame 1 w.r.t Frame 0
 A1 = [cos(q(1)) -sin(q(1))*cos(-PI/2)  sin(q(1))*sin(-PI/2)  0;
       sin(q(1))  cos(q(1))*cos(-PI/2) -cos(q(1))*sin(-PI/2)  0;
@@ -63,10 +62,15 @@ A4 = [cos(q(4)-(PI/2)) -sin(q(4)-(PI/2))*cos(-PI/2)   sin(q(4)-(PI/2))*sin(-PI/2
 %               0       0      1         0;
 %               0       0      0         1];
 
-A5 = [1 0 0  0;
-      0 1 0  0;
-      0 0 1  L5;
-      0 0 0  1];
+% A5 = [1 0 0  0;
+%       0 1 0  0;
+%       0 0 1  L5;
+%       0 0 0  1];
+  
+A5 = [cos(q(5)) -sin(q(5))  0        0;
+      sin(q(5))  cos(q(5))  0        0;
+              0          0  1       L5;
+              0          0  0        1];
      
 %Gripper Frame w.r.t. Frame 5
 angle = pi; 

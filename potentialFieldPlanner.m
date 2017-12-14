@@ -5,7 +5,7 @@ function [] = potentialFieldPlanner(qStart,qEnd)
 % @param: qEnd: a 6x1 matrix of the joint configurations of ending pos
 
 %start the lynx
-lynxStart();        
+%lynxStart();        
 
 % set the epsilon for what a reasonable distance to stop is 
 epsilon = .5; 
@@ -82,7 +82,7 @@ while any((qEnd(1,1:5) - qCurr(1,1:5)) > epsilon)
     tau = tauaTotal;
     
     %set the step rate
-    alpha = 0.015;
+    alpha = 0.01;
     
     %ensure there is not
     if (norm(tau)~=0)
